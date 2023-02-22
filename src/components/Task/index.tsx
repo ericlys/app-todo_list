@@ -1,25 +1,40 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
-import Icon from '@expo/vector-icons/Feather';
-import { useState } from "react";
+import Icon from "@expo/vector-icons/Feather";
 
+interface TaskProps {
+  task: {
+    id: string
+    description: string
+    isDone: boolean
+  }
+  setDone: (id: string) => void
+  deleteTask: (id: string) => void
+}
 
-export function Task() {
-  const [done, setDone] = useState(false);
+export function Task({ task, setDone, deleteTask}: TaskProps) {
+
+  function handleTaskDone() {
+    setDone(task.id)
+  }
+
+  function handleDeleteTask() {
+    deleteTask(task.id)
+  }
 
   return (
     <View style={styles.taskContainer}>
-      <TouchableOpacity style={styles.taskButton} onPress={() => setDone(!done)}>
-        <View style={ done ? styles.taskCircleDone : styles.taskCircle}>
-          {done && <Icon name="check" color="#ffff"/>}
+      <TouchableOpacity style={styles.taskButton} onPress={handleTaskDone}>
+        <View style={ task.isDone ? styles.taskCircleDone : styles.taskCircle}>
+          {task.isDone && <Icon name="check" color="#ffff"/>}
         </View>
       </TouchableOpacity>
 
-      <Text style={ done ? styles.taskTextDone : styles.taskText}>
-        Integer urna interdum massa libero auctor neque turpis turpis semper.
+      <Text style={ task.isDone ? styles.taskTextDone : styles.taskText}>
+        {task.description}
       </Text>
 
-      <TouchableOpacity style={styles.trashButton}>
+      <TouchableOpacity style={styles.trashButton} onPress={handleDeleteTask}>
         <Icon name="trash-2" color="#808080" size={16}/>
       </TouchableOpacity>
     </View>

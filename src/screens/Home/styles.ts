@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: 24
   },
   taskList: {
-    marginTop: 20
+    marginTop: 12
   },
   emptyList: {
     alignItems: "center",

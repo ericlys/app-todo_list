@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   taskContainer: {
     width: "100%",
     padding: 12,
+    marginTop: 8,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
